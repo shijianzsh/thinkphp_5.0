@@ -22,25 +22,22 @@ class Index extends Controller
     }
 
 
-    /*
-     * redis
-     */
-    public function index()
-    {
+//    public function redis()
+//    {
 
-        $options = [
-            // 缓存类型为File
-            'type' => 'redis',
-            // 缓存有效期为永久有效
-            'expire' => 0,
-            'host' => '127.0.0.1', // redis主机
-            'port' => 6379, // redis端口
-            'password' => '', // 密码
-            'select' => 0, // 操作库
-            'timeout' => 0, // 超时时间(秒)
-            'persistent' => true, // 是否长连接
-            'session_name' => '', // sessionkey前缀
-        ];
+//        $options = [
+//            // 缓存类型为File
+//            'type' => 'redis',
+//            // 缓存有效期为永久有效
+//            'expire' => 0,
+//            'host' => '127.0.0.1', // redis主机
+//            'port' => 6379, // redis端口
+//            'password' => '', // 密码
+//            'select' => 0, // 操作库
+//            'timeout' => 0, // 超时时间(秒)
+//            'persistent' => true, // 是否长连接
+//            'session_name' => '', // sessionkey前缀
+//        ];
 
 //        $redis = new Redis($options);
 
@@ -216,42 +213,16 @@ class Index extends Controller
 //        $result = $redis->handler()->sort('uid',array('by'=>'user_info_*->level','get'=>'user_info_*->name'));
 //        dump($result);
 
+//    }
+
+    // 二维码
+    public function index()
+    {
         // 生成二维码
-//        $img = $this->scerweima('https://www.baidu.com');
-//        $this->assign('img', $img);
-//        return view();
-
-        // rsa 加密解密
-//        $rsaPublicKeyFilePath = "./static/key/public_key.pem";
-//        $public_content=file_get_contents($rsaPublicKeyFilePath);
-//        $public_key=openssl_get_publickey($public_content);
-//        $original_str='{"phone":"18347267288","type":"register"}';
-//        $original_arr=str_split($original_str,117);  //折分
-//        $original_enc_arr = array();
-//        foreach($original_arr as $o) {
-//            $sub_enc=null;
-//            openssl_public_encrypt($o,$sub_enc,$public_key);
-//            $original_enc_arr[]=$sub_enc;
-//        }
-//        openssl_free_key($public_key);
-//        $original_enc_str=base64_encode(implode('',$original_enc_arr));//最终网络传的密文
-//
-//        dump($original_enc_str);
-//
-//        $rsaPrivateKeyFilePath = "./static/key/private_key.pem";
-//        $private_content = file_get_contents($rsaPrivateKeyFilePath);
-//        $private_key = openssl_get_privatekey($private_content);
-//        $original_enc_str = base64_decode($original_enc_str);
-//        $orig_dec_str = '';
-//        for ($i = 0; $i < strlen($original_enc_str) / 128; $i++) {
-//            $data = substr($original_enc_str, $i * 128, 128);
-//            openssl_private_decrypt($data, $decrypt, $private_key);
-//            $orig_dec_str .= $decrypt;
-//        }
-//
-//        dump($orig_dec_str);
+        $img = $this->scerweima('https://www.baidu.com');
+        $this->assign('img', $img);
+        return view();
     }
-
     // 生成原始的二维码(生成图片文件)
     function scerweima($url=''){
 
@@ -303,4 +274,38 @@ class Index extends Controller
         return 'http://localhost/thinkphp_5.0/public/static/qrcode/'.$new_img;
     }
 
+    // rsa加密解密
+    public function rsa()
+    {
+        // rsa 加密
+        $rsaPublicKeyFilePath = "./public/static/key/public_key.pem";
+        $public_content=file_get_contents($rsaPublicKeyFilePath);
+        $public_key=openssl_get_publickey($public_content);
+        $original_str='{"phone":"18347267288","type":"register"}';
+        $original_arr=str_split($original_str,117);  //折分
+        $original_enc_arr = array();
+        foreach($original_arr as $o) {
+            $sub_enc=null;
+            openssl_public_encrypt($o,$sub_enc,$public_key);
+            $original_enc_arr[]=$sub_enc;
+        }
+        openssl_free_key($public_key);
+        $original_enc_str=base64_encode(implode('',$original_enc_arr));//最终网络传的密文
+
+        dump($original_enc_str);
+
+        // rsa 解密
+        $rsaPrivateKeyFilePath = "./public/static/key/private_key.pem";
+        $private_content = file_get_contents($rsaPrivateKeyFilePath);
+        $private_key = openssl_get_privatekey($private_content);
+        $original_enc_str = base64_decode($original_enc_str);
+        $orig_dec_str = '';
+        for ($i = 0; $i < strlen($original_enc_str) / 128; $i++) {
+            $data = substr($original_enc_str, $i * 128, 128);
+            openssl_private_decrypt($data, $decrypt, $private_key);
+            $orig_dec_str .= $decrypt;
+        }
+
+        dump($orig_dec_str);
+    }
 }

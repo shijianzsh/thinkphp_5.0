@@ -13,7 +13,7 @@
             }
         });
         $().ready(function() {
-// 在键盘按下并释放及提交后验证提交表单
+            // 在键盘按下并释放及提交后验证提交表单
             $("#signupForm").validate({
                 rules: {
                     firstname: "required",
@@ -71,7 +71,7 @@
     </style>
 </head>
 <body>
-<form class="cmxform" id="signupForm" method="get" action="">
+<form class="cmxform" id="signupForm" method="post" action="getShow">
     <fieldset>
         <legend>验证完整的表单</legend>
         <p>

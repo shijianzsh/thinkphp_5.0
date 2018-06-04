@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__static__/css/register.css">
+    <!--3月15号-->
+    <title>注册</title>
+
+</head>
+<body>
+<div class="warp">
+    <div class="header"></div>
+    <div class="center">
+        <form action="http://127.0.0.1:8081/aaa" method="post">
+            <div class="tel">
+                <span class="img-t"></span>
+
+                <input id="tel" name='tel' type="number" placeholder="请输入手机号">
+            </div>
+            <div class="number">
+                <span class="img-y" style="padding-bottom: 1px;">T</span>
+
+                <input id="number" name='number' type="number" placeholder="输入验证码">
+                <button type="button" id="yanzh"><span class="di">发送验证码</span></button>
+                <input id="id" name="id" type="hidden">
+            </div>
+            <div class="register">
+                <button id="btn" disabled="disabled">注册</button>
+            </div>
+        </form>
+
+    </div>
+    <div class="footer">
+        <span class="agree" style="color:#fff;"></span>
+        我已阅读并同意<a href="protocol">《用户服务协议》</a>
+    </div>
+</div>
+<script src="__static__/js/jquery-1.11.2.min.js"></script>
+<script>
+    (function ($) {
+        $.getUrlParam = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+    })(jQuery);
+    $(function () {
+        var boo1 = false
+        var num = $("#number").val();
+        console.log(num)
+        $('#id').val(id);
+        $('#tel').keyup(function () {
+            var tel = $("#tel").val();
+            var reg = new RegExp(/^1[0-9]{10}$/);
+            boo1 = reg.test(tel);
+            select();
+        })
+        $('#yanzh').click(function () {
+            $(this).attr("disabled", true)
+            var i = 60;
+            var times = setInterval(function () {
+                i--;
+                $(this).attr("disabled", true)
+                if (i == 0 || i < 0) {
+                    i = 60
+                } else if (i <= 60 && i >= 1) {
+                    $('#yanzh').html('已发送' + i);
+                }
+            }, 1000)
+            setTimeout(function () {
+                clearInterval(times)
+                var tel = $("#tel").val();
+                var reg = new RegExp(/^1[0-9]{10}$/);
+                boo1 = reg.test(tel);
+                select();
+                if (boo1 == true) {
+                    $('#yanzh').attr("disabled", false);
+                    $('#yanzh').html('重新发送');
+                } else {
+                    $('#yanzh').attr("disabled", true);
+                    $('#yanzh').html('重新发送');
+                }
+            }, 60000)
+        })
+        select();
+        function select() {
+            if (boo1 == true) {
+                $('#yanzh').attr("disabled", false);
+            } else {
+                $('#yanzh').attr("disabled", true);
+            }
+        }
+//=====================================================
+        var flag = false;//协议控制标记
+        $('#number').keyup(function () {
+            num = $("#number").val();
+            if (boo1 == true && num != null && num != "" && flag == true) {
+                $("#btn").attr("disabled", false)
+            }else{
+                $("#btn").attr("disabled", true)
+            }
+        });
+
+        $('.agree').click(function () {
+            tel = $('#tel').val();
+            if (flag == false) {
+                $(this).text("√");
+                flag = true;
+            } else {
+                $(this).text("");
+                flag = false;
+            }
+            if (boo1 == true && num != null && num != "" && flag == true) {
+                $("#btn").attr("disabled", false)
+            }else{
+                $("#btn").attr("disabled", true)
+            }
+        })
+        //手机号不对提示部分
+        $(".di").css({
+            display: 'block',
+            height:'100%'
+        }).click(function () {
+            if (boo1 == false) {
+                alert("请输入正确的手机号");
+            }
+        })
+    })
+</script>
+</body>
+</html>

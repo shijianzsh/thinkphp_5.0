@@ -1,0 +1,23 @@
+<form action="get_rule" method="post">
+    <div class="rule">
+        <ul style="padding-left: 20px;">
+            {volist name="list['first_arr']" id="vo"}
+
+            <li><input type="checkbox" name="id[]" value="{$vo.id}" {if condition="in_array($vo.id, $rule)"}checked{/if}>{$vo.name}</li>
+            <ul style="padding-left: 25px;">
+                {volist name="vo.second_arr" id="vi"}
+                <li><input type="checkbox" name="id[]" value="{$vi.id}" {if condition="in_array($vi.id, $rule)"}checked{/if}>{$vi.name}</li>
+                <ul style="padding-left: 25px;">
+                    {volist name="vi.third_arr" id="vs"}
+                    <li><input type="checkbox" name="id[]" value="{$vs.id}" {if condition="in_array($vs.id, $rule)"}checked{/if}>{$vs.name}</li>
+                    {/volist}
+                </ul>
+                {/volist}
+            </ul>
+            {/volist}
+
+        </ul>
+        <input type="hidden" name="group_id" value="{$group_id}">
+        <input type="submit" class="submit" value="提交">
+    </div>
+</form>

@@ -308,4 +308,14 @@ class Index extends Controller
 
         dump($orig_dec_str);
     }
+
+    public function showtime()
+    {
+        return view();
+    }
+
+    public function vue(){
+
+        return 'vue';
+    }
 }

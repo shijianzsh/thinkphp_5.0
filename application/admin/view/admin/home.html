@@ -48,12 +48,12 @@
             top: 0;
             left: 165px;
         }
-        .left dl{
+        .left > dl{
             width: 100%;
             line-height: 40px;
             cursor: pointer;
         }
-        dt{
+        .left > dl > dt{
             background-color: #417cc0;
             display: none;
         }
@@ -62,6 +62,11 @@
             color: #c7254e;
         }
         .third{
+            background-color: #FFFFFF;
+            color: #000;
+            display: none;
+        }
+        .left > dl > dt > div{
             background-color: #FFFFFF;
             color: #000;
             display: none;
@@ -83,16 +88,14 @@
             <dt>
                 {if condition="in_array($v.id, $auth)"}
                     {if condition="empty($v.third_arr)"}
-                    <p><a name="{$v.match_rule}" class="click">{$v.name}</a></p>
-                    {else}
-                    <p>{$v.name}</p>
+                        <p><a name="{$v.match_rule}" class="click">{$v.name}</a></p>
+                        {else}
+                        <p>{$v.name}</p>
                     {/if}
                 {/if}
                 {volist name="v.third_arr" id="s"}
                     {if condition="in_array($s.id, $auth)"}
-                    <ul class="third">
-                        <li><a name="{$s.match_rule}" class="click">{$s.name}</a></li>
-                    </ul>
+                        <div><a name="{$s.match_rule}" class="click">{$s.name}</a></div>
                     {/if}
                 {/volist}
             </dt>
@@ -108,10 +111,10 @@
 <script>
     $(function () {
         $("dd").click(function () {
-            $(this).siblings().toggle("slow").parent().siblings().children("dt").hide();
+            $(this).siblings().slideToggle('fast').parent('dl').siblings().children('dt').slideUp('fast');
         });
         $("p").click(function () {
-            $(this).siblings().toggle("slow").parent().siblings("dt").children(".third").hide();
+            $(this).siblings().slideToggle('fast').parent('dt').siblings().children('div').slideUp('fast');
         })
         $(".click").click(function () {
             var name = $(this).attr("name");

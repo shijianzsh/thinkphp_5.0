@@ -16,8 +16,23 @@ class Merchant extends Basic
 
         $this->check_auth();
     }
-    
+
+    /**
+     * 渲染商家列表展示
+     * Created by liuHW
+     * Date 2018/6/13
+     */
     public function merchant_list()
+    {
+        return view();
+    }
+
+    /**
+     * 渲染空的HTML 演示js
+     * Created by liuHW
+     * Date 2018/6/13
+     */
+    public function es()
     {
         return view();
     }

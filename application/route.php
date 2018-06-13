@@ -19,7 +19,7 @@
 //\think\Route::get('weima', 'admin/Index/index');
 //
 //// rsa 加密解密
-//\think\Route::get('rsa', 'admin/Index/rsa');
+\think\Route::get('rsa', 'admin/Index/rsa');
 //
 //// 路由完全匹配需要添加 $
 //\think\Route::get('admin/:year$', 'admin/Admin/show');
@@ -31,4 +31,8 @@ return [
     'rule/:group_id'=>'admin/Admin/rule',   // 权限页面
     'get_rule'=>'admin/Admin/get_rule',     // 修改权限方法
     'error'=>'admin/Admin/nofind',          // 错误页面
+    // 时间控件
+    'time'=>'admin/Index/showtime',
+
+    'vue'=>'admin/Index/vue'
 ];

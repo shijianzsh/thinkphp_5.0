@@ -33,6 +33,8 @@ return [
     'error'=>'admin/Admin/nofind',          // 错误页面
     // 时间控件
     'time'=>'admin/Index/showtime',
-
-    'vue'=>'admin/Index/vue'
+    // vue 请求的数据
+    'vue'=>'admin/Index/vue',
+    // es 页面
+    'es'=>'admin/Merchant/es'
 ];

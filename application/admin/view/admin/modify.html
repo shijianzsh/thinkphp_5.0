@@ -34,7 +34,7 @@
 <body>
 {volist name="list" id="vo"}
 <div>
-    {$vo.title} <button class="modify" value="{$vo.group_id}">修改权限</button>
+    {$vo.title} <button class="modify" value="{$vo.group_id}">{$vo.group_id}修改权限</button>
 </div>
 {/volist}
 <div class="rules">
@@ -45,7 +45,7 @@
     $(function () {
         $('.modify').click(function () {
             $('.rules').css({'display':'block'});
-            var group_id = $('.modify').attr('value');
+            var group_id = $(this).attr('value');
             $('.rule-list').load("rule/"+group_id);
         });
         $('.submit').click(function () {

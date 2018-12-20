@@ -12,6 +12,7 @@ use think\Cache;
 use think\cache\driver\Redis;
 use think\Controller;
 use think\Db;
+use think\Session;
 
 class Index extends Controller
 {
@@ -314,8 +315,27 @@ class Index extends Controller
         return view();
     }
 
-    public function vue(){
+    public function vue($a){
 
-        return 'vue';
+
+        echo $a;
+
+    }
+
+    public function session()
+    {
+        $data['name'] = 'thinkPHP';
+        $data['expire'] = '60';
+
+    }
+
+    public function check_session($result)
+    {
+        $data['flag'] = 'success';
+        $data['message'] = '请求成功';
+        $data['code'] = 0000;
+        $data['data'] = $result;
+
+        return json_encode($data);
     }
 }

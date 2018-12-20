@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
+    {js file="__static__/js/jquery-1.11.2.min.js"}
     <style>
         body{padding: 20px;}
         .demo-input{padding-left: 10px; height: 38px; min-width: 262px; line-height: 38px; border: 1px solid #e6e6e6;  background-color: #fff;  border-radius: 2px;}
@@ -17,10 +18,56 @@
 </head>
 <body>
 
-<input type="text" class="demo-input" placeholder="日期" id="test2">
+<input type="text" class="demo-input" placeholder="日期" id="test-limit3">
 
+<select name="" id="time" style="width: 200px; height: 30px;">
+
+</select>
 
 </body>
+<script>
+    $(document).ready(function () {
+        var today = new Date('2015/07/08');
+        var old = new Date('2015/1/31');
+        console.log(today);
+        if (today > old) {
+            console.log('1');
+        } else {
+            console.log('2');
+        }
+
+        var html = '';
+        var m = '12:00';
+
+        for (var i = 0; i < 24; i++) {
+            for (var j = 0; j <= 1; j++) {
+                if(i<10) {
+                    var a='0'+i
+                } else {
+                    var a=i
+                }
+                if(j==0) {
+                    var b='00'
+                } else if(j==1) {
+                    var b='30'
+                }
+                console.log(a+':'+b)
+
+                var data = a + ':' + b;
+                if (m == data) {
+                    html = html + '<option value="'+data+'" selected="selected">'+data+'</option>';
+                } else {
+                    html = html + '<option value="'+data+'">'+data+'</option>';
+                }
+            }
+        }
+        $('#time').html(html);
+
+        $('#time').change(function () {
+            alert('您选择的时间是'+$(this).val());
+        })
+    })
+</script>
 <script src="__static__/laydate/laydate.js"></script> <!-- 改成你的路径 -->
 <script>
     lay('#version').html('-v'+ laydate.v);
@@ -43,7 +90,7 @@
     //年选择器
     laydate.render({
         elem: '#test2'
-        ,type: 'year'  // 属性参考 month time datetime
+        ,type: 'datetime'  // 属性参考 month time datetime
     });
     //日期范围
     laydate.render({

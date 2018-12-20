@@ -27,13 +27,4 @@ class Merchant extends Basic
         return view();
     }
 
-    /**
-     * 渲染空的HTML 演示js
-     * Created by liuHW
-     * Date 2018/6/13
-     */
-    public function es()
-    {
-        return view();
-    }
 }

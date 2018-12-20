@@ -10,3 +10,11 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
+function object_to_array($object){
+    $result = null;
+    if($object){
+        $result = json_decode(json_encode($object),true);
+    }
+    return $result;
+}

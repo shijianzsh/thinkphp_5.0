@@ -21,6 +21,20 @@
     <p id="order_time_5" data-id="5" data-endtime="2019/07/10 16:44:00"  class="remain-time"></p>
 </div>
 <script type="text/javascript">
+    // 时间戳转时间格式
+    function RiQi(sj) {
+        var now = new Date(sj*1000);
+        var year=now.getFullYear();
+        var month=now.getMonth()+1;
+        var date=now.getDate();
+        var hour=now.getHours();
+        var minute=now.getMinutes();
+        var second=now.getSeconds();
+        return   year+"/"+month+"/"+date+" "+hour+":"+minute+":"+second;
+    }
+    console.log(RiQi(1559813947));
+
+    // 批量赋值
     $('.remain-time').each(function () {
         // 获取结束时间
         var end_time = $(this).attr('data-endtime');
@@ -31,6 +45,7 @@
 
     });
 
+    // 倒计时
     function timeout(obj,end_time) {
         var starttime = new Date(end_time);
         setInterval(function () {
@@ -40,7 +55,7 @@
             var hour = parseInt(time / 1000 / 60 / 60 % 24);
             var minute = parseInt(time / 1000 / 60 % 60);
             var seconds = parseInt(time / 1000 % 60);
-            console.log("距离结束" + day + "天" + hour + "小时" + minute + "分钟" + seconds + "秒");
+            // console.log("距离结束" + day + "天" + hour + "小时" + minute + "分钟" + seconds + "秒");
             $(obj).html(day + "天" + hour + "小时" + minute + "分钟" + seconds + "秒");
         }, 1000);
     }

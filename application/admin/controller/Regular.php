@@ -67,4 +67,30 @@ class Regular extends Controller
         // \B匹配除单词边界以外部分,本例 Think PHP右边不能有边界,左边必须要有边界
         echo preg_match('/\bPHP\B/', 'Think PHP5.0') ? '匹配成功<br />' : '匹配失败<br />';
     }
+
+    /**
+     * Desc: 百度AI识别身份证信息
+     * @return array
+     */
+    public function card_discern()
+    {
+        vendor('aip.AipOcr');
+
+        $client = new \AipOcr('15493742', 'AEsAwZYKZ6R9U8rbd2pXsgGX', 'jeynH29XAsaMwUFb8j10GzHEqa7Gp6dy');
+
+        $image = file_get_contents('./public/static/card.jpg');
+        $idCardSide = "front";
+
+        // 调用身份证识别
+        $client->idcard($image, $idCardSide);
+
+        // 如果有可选参数
+        $options = array();
+        $options["detect_direction"] = "true";
+        $options["detect_risk"] = "false";
+
+        // 带参数调用身份证识别
+        $ret = $client->idcard($image, $idCardSide, $options);
+        dump($ret);
+    }
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>多个timeout</title>
+    {js file="__static__/js/jquery-1.11.2.min.js"}
+</head>
+<body>
+<div>
+    <h5 class="text-success">倒计</h5>
+    <!-- 已结束 -->
+    <p id="order_time_1" data-id="1" data-endtime="2019/06/10 11:30:59"  class="remain-time"></p>
+    <!-- 距多少开始 -->
+    <p id="order_time_2" data-id="2" data-endtime="2019/06/20 12:00:00"  class="remain-time"></p>
+    <!-- 距多少开始 -->
+    <p id="order_time_3" data-id="3" data-endtime="2019/07/20 12:00:00"  class="remain-time"></p>
+
+    <!-- 距多少结束 -->
+    <p id="order_time_4" data-id="4" data-endtime="2019/08/10 23:59:59"  class="remain-time"></p>
+    <!-- 距多少结束 -->
+    <p id="order_time_5" data-id="5" data-endtime="2019/07/10 16:44:00"  class="remain-time"></p>
+</div>
+<script type="text/javascript">
+    $('.remain-time').each(function () {
+        // 获取结束时间
+        var end_time = $(this).attr('data-endtime');
+
+        var obj = $(this);
+
+        console.log(timeout(obj,end_time));
+
+    });
+
+    function timeout(obj,end_time) {
+        var starttime = new Date(end_time);
+        setInterval(function () {
+            var nowtime = new Date();
+            var time = starttime - nowtime;
+            var day = parseInt(time / 1000 / 60 / 60 / 24);
+            var hour = parseInt(time / 1000 / 60 / 60 % 24);
+            var minute = parseInt(time / 1000 / 60 % 60);
+            var seconds = parseInt(time / 1000 % 60);
+            console.log("距离结束" + day + "天" + hour + "小时" + minute + "分钟" + seconds + "秒");
+            $(obj).html(day + "天" + hour + "小时" + minute + "分钟" + seconds + "秒");
+        }, 1000);
+    }
+</script>
+</body>
+</html>

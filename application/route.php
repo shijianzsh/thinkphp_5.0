@@ -90,6 +90,9 @@
 \think\Route::rule('session', 'admin/Index/session');
 \think\Route::rule('check_session', 'admin/Index/check_session');
 
+// 百度AI识别身份证信息
+\think\Route::get('card_discern', 'admin/Regular/card_discern');
+
 // 定义路由
 return [
     // 模拟权限管理的后台
@@ -98,10 +101,10 @@ return [
     'get_rule'=>'admin/Admin/get_rule',     // 修改权限方法
     'error'=>'admin/Admin/nofind',          // 错误页面
 
-    // upload
-    'upload'=>'admin/Upload/index',
-
     'upload_pic'=>'admin/Upload/upload_pic',
+
+
+    'set_time' => 'admin/Index/set_time'
 
 ];
 

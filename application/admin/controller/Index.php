@@ -224,6 +224,7 @@ class Index extends Controller
         $this->assign('img', $img);
         return view();
     }
+
     // 生成原始的二维码(生成图片文件)
     function scerweima($url=''){
 
@@ -337,5 +338,11 @@ class Index extends Controller
         $data['data'] = $result;
 
         return json_encode($data);
+    }
+
+    // jQuery 多个倒计时
+    public function set_time()
+    {
+        return view();
     }
 }

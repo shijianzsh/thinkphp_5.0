@@ -101,11 +101,9 @@ return [
     'get_rule'=>'admin/Admin/get_rule',     // 修改权限方法
     'error'=>'admin/Admin/nofind',          // 错误页面
 
-    'upload_pic'=>'admin/Upload/upload_pic',
+    'upload_pic'=>'admin/Upload/upload_pic', // 文件上传
 
-
-    'set_time' => 'admin/Index/set_time'
-
+    'set_time' => 'admin/Index/set_time', // 多个倒计时
 ];
 
 

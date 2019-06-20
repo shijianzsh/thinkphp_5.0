@@ -51,16 +51,16 @@ class ShopPayApp extends Controller
             return '签名失败';
         } else {
             //接收微信返回的数据,传给APP!
-            $data["appid"] = $this->config["appid"];
-            $data["noncestr"] = $nonce_str;
-            $data["package"] = "Sign=WXPay";
-            $data["partnerid"] = $this->config['mch_id'];
-            $data["prepayid"] = $response['prepay_id'];
-            $data["timestamp"] = time();
-            $s = $this->get_sign($data);
-            $data["sign"] = $s;
+            $data_["appid"] = $this->config["appid"];
+            $data_["noncestr"] = $nonce_str;
+            $data_["package"] = "Sign=WXPay";
+            $data_["partnerid"] = $this->config['mch_id'];
+            $data_["prepayid"] = $response['prepay_id'];
+            $data_["timestamp"] = time();
+            $s = $this->get_sign($data_);
+            $data_["sign"] = $s;
 
-            return $data;
+            return json_encode($data_);
         }
     }
 

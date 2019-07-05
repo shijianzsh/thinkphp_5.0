@@ -24,14 +24,11 @@ class Upload extends Controller
      * Desc: 单个文件上传
      * Created by LiuHW
      * Date: 2018/10/23
-     * @param string $img       图片
-     * @param string $file_url  存放路径
-     * @return string
      */
     public function upload_pic()
     {
         $image = input('formData');
         dump($image);
-        base64_image_content($image);
+        dump(base64_image_content($image));
     }
 }

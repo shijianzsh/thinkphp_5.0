@@ -93,6 +93,10 @@
 // 百度AI识别身份证信息
 \think\Route::get('card_discern', 'admin/Regular/card_discern');
 
+// 文件上传
+\think\Route::rule('upload_index', 'admin/Upload/index');
+\think\Route::rule('upload_pic', 'admin/Upload/upload_pic');
+
 // 定义路由
 return [
     // 模拟权限管理的后台
@@ -100,8 +104,6 @@ return [
     'rule/:group_id'=>'admin/Admin/rule',   // 权限页面
     'get_rule'=>'admin/Admin/get_rule',     // 修改权限方法
     'error'=>'admin/Admin/nofind',          // 错误页面
-
-    'upload_pic'=>'admin/Upload/upload_pic', // 文件上传
 
     'set_time' => 'admin/Index/set_time', // 多个倒计时
 ];

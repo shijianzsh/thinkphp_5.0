@@ -7,18 +7,17 @@
 </head>
 <body>
 
-
-
-用户名：<input id="username" type="text"><br>
 用户图像：<input id="userface" type="file" onchange="preview(this)"><br>
+<input type="hidden" name="image" value="">
 <div id="preview"></div>
 <input type="button" id="btnClick" value="上传">
 <script>
     $("#btnClick").click(function () {
         var formData = new FormData();
-        formData.append("username", $("#username").val());
-        formData.append("file", $("#userface")[0].files[0]);
-        console.log(formData);
+        // formData.append("username", $("#username").val());
+        // formData.append("file", $("#userface")[0].files[0]);
+        formData.append("file", $("input[name=image]").val());
+        // console.log(formData);
         $.ajax({
             url: 'upload_pic',
             type: 'post',
@@ -35,7 +34,9 @@
         if (file.files && file.files[0]) {
             var reader = new FileReader();
             reader.onload = function (evt) {
-                prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';
+                prevDiv.innerHTML = '<img src="' + evt.target.result + '" style="width: 80px; height: 80px;"/>';
+
+                $('input[name=image]').val(evt.target.result);
             }
             reader.readAsDataURL(file.files[0]);
         } else {

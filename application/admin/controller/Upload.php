@@ -15,8 +15,9 @@ class Upload extends Controller
 
     public function index ()
     {
-        $ret = \app\common\model\Admin::createAdmin();
-        dump($ret);
+        // $ret = \app\common\model\Admin::createAdmin();
+        // dump($ret);
+        return view();
     }
 
     /**
@@ -29,18 +30,8 @@ class Upload extends Controller
      */
     public function upload_pic()
     {
-        // 获取表单上传文件 例如上传了001.jpg
-        $files = $this->request->file('file');
-        if ($files) {
-            // 移动到框架应用根目录/uploads/ 目录下
-            $info = $files->move( '../public/uploads/coppa');
-            if($info){
-                // 成功上传后 获取上传信息
-                return str_replace('\\', '/', $info->getSaveName());
-            }else{
-                // 上传失败获取错误信息
-                return $files->getError();
-            }
-        }
+        $image = input('formData');
+        dump($image);
+        base64_image_content($image);
     }
 }

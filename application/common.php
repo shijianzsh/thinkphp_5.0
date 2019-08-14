@@ -25,7 +25,7 @@ function object_to_array($object){
  */
 function base64_image_content()
     {
-        $base64_image_content = I('pic');   // 接收图片的base64
+        $base64_image_content = input('pic');   // 接收图片的base64
         $base64_image = str_replace(' ', '+', $base64_image_content);
         // 阿里云上传文件的名称方式 文件名同本地的临时储存目录
         $ryear=date("Y",time());

@@ -23,7 +23,7 @@ function object_to_array($object){
  * base64上传图片
  * @param $base64_image_content
  */
-public function base64_image_content()
+function base64_image_content()
     {
         $base64_image_content = I('pic');   // 接收图片的base64
         $base64_image = str_replace(' ', '+', $base64_image_content);

@@ -97,15 +97,17 @@
 \think\Route::rule('upload_index', 'admin/Upload/index');
 \think\Route::rule('upload_pic', 'admin/Upload/upload_pic');
 
+// 资源路由测试
+\think\Route::resource('user/:user_id', 'admin/User', ['before_behavior'=>'\app\admin\behavior\UserCheck']);
+
 // 定义路由
-return [
-    // 模拟权限管理的后台
-    'admin'=>'admin/Admin/home',             // 主页面
-    'rule/:group_id'=>'admin/Admin/rule',   // 权限页面
-    'get_rule'=>'admin/Admin/get_rule',     // 修改权限方法
-    'error'=>'admin/Admin/nofind',          // 错误页面
-
-    'set_time' => 'admin/Index/set_time', // 多个倒计时
-];
-
+//return [
+//    // 模拟权限管理的后台
+//    'admin'=>'admin/Admin/home',             // 主页面
+//    'rule/:group_id'=>'admin/Admin/rule',   // 权限页面
+//    'get_rule'=>'admin/Admin/get_rule',     // 修改权限方法
+//    'error'=>'admin/Admin/nofind',          // 错误页面
+//
+//    'set_time' => 'admin/Index/set_time', // 多个倒计时
+//];
 
